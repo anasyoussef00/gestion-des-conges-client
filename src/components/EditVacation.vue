@@ -75,9 +75,9 @@ const editVacation = async () => {
 				<div v-for="(error, index) in errors.nbrejrs" :key="index" id="nbrejrs" class="form-text text-danger">{{error}}</div>
 			</div>
 			<div class="d-flex justify-content-around align-items-center">
-				<button class="btn btn-outline-success" type="submit">Submit</button>
+				<button class="btn btn-outline-success" type="submit">Edit</button>
 				<a class="text-primary" href="/add-vacation">Add vacation</a>
-				<a class="text-danger" href="#">Delete vacation</a>
+				<a class="text-danger" href="/delete-vacation">Delete vacation</a>
 			</div>
 		</section>
 	</form>

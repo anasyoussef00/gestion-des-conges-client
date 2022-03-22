@@ -70,7 +70,7 @@ const addVacation = async () => {
 			<div class="d-flex justify-content-around align-items-center">
 				<button class="btn btn-outline-primary" type="submit">Submit</button>
 				<a class="text-success" href="/edit-vacation">Edit vacation</a>
-				<a class="text-danger" href="#">Delete vacation</a>
+				<a class="text-danger" href="/delete-vacation">Delete vacation</a>
 			</div>
 		</section>
 	</form>
