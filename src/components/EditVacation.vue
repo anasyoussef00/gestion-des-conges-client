@@ -5,25 +5,27 @@ import Swal from 'sweetalert2'
 import Api from '@/api/Api'
 
 const formData = reactive({
-  nomJr: '',
-  prenomJr: '',
-  matriculeJr: '',
-  periode: Date.now(),
-  nbrejrs: 1
+  member_id: '',
+  nom: '',
+  prenom: '',
+  matricule: '',
+  periode: '',
+  nbrejrs: ''
 })
 
 const errors: Ref<Record<string, unknown>> = ref({})
 const errorMsg: Ref<string> = ref('')
 
-const addVacation = async () => {
+const editVacation = async () => {
   try {
-    await Api.post('/vacation/add', formData)
+    await Api.post('/vacation/edit', formData)
     Swal.fire({
       title: 'Nice!',
-      text: 'Vacation has been added successfully.',
+      text: 'Vacation has been updated successfully.',
       icon: 'success'
     })
   } catch (err: any) {
+  	console.error(err)
     errorMsg.value = err.response.data.message
     errors.value = err.response.data.errors
     Swal.fire({
@@ -39,9 +41,14 @@ const addVacation = async () => {
 </script>
 
 <template>
-	<form @submit.prevent="addVacation">
-		<h1 class="text-center">Add vacation</h1>
+	<form @submit.prevent="editVacation">
+		<h1 class="text-center">Edit vacation</h1>
 		<section class="border border-dark p-4">
+			<div class="form-group mb-2">
+				<label for="member-id">Member id</label>
+				<input v-model="formData.member_id" class="form-control" type="text" name="member-id" placeholder="e.g. 1" aria-describedby="member-id" />
+				<!-- <div v-for="(error, index) in errors.nom" :key="index" id="member-id" class="form-text text-danger">{{error}}</div> -->
+			</div>
 			<div class="form-group mb-2">
 				<label for="nom">Nom</label>
 				<input v-model="formData.nom" class="form-control" type="text" name="nom" placeholder="e.g. Doe" aria-describedby="nom" />
@@ -68,8 +75,8 @@ const addVacation = async () => {
 				<div v-for="(error, index) in errors.nbrejrs" :key="index" id="nbrejrs" class="form-text text-danger">{{error}}</div>
 			</div>
 			<div class="d-flex justify-content-around align-items-center">
-				<button class="btn btn-outline-primary" type="submit">Submit</button>
-				<a class="text-success" href="/edit-vacation">Edit vacation</a>
+				<button class="btn btn-outline-success" type="submit">Submit</button>
+				<a class="text-primary" href="/add-vacation">Add vacation</a>
 				<a class="text-danger" href="#">Delete vacation</a>
 			</div>
 		</section>
